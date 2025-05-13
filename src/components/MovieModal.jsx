@@ -15,6 +15,7 @@ const MovieModal = ({ movie, onClose }) => {
     lovedMovies = lovedMovies.filter(m => m.id !== movie.id);
     localStorage.setItem("lovedMovies", JSON.stringify(lovedMovies));
     setIsLoved(false);
+    onClose()
   };
 
   return (

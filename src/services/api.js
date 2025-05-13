@@ -26,12 +26,12 @@ export const FetchQuery = async (query) => {
   
 
 export function handleFavorite(movie, isLoved, setIsLoved) {
-  const newLoveState = isLoved === "🤍" ? "❤️" : "🤍";
+  const newLoveState = !isLoved;
   setIsLoved(newLoveState);
 
   let lovedMovies = JSON.parse(localStorage.getItem("lovedMovies")) || [];
 
-  if (newLoveState === "❤️") {
+  if (newLoveState) {
     // Avoid duplicate entries
     const alreadyLoved = lovedMovies.find(m => m.id === movie.id);
     if (!alreadyLoved) {

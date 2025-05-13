@@ -3,13 +3,9 @@ import MovieModal from "../components/MovieModal"
 import "../css/Home.css"
 
 import { useState, useEffect } from "react"
-import { useLocation } from "react-router-dom"
 import {FetchPopular, FetchQuery} from "../services/api"
 
-
-
 const Home = () => {
-  const location = useLocation();
 
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
@@ -17,6 +13,7 @@ const Home = () => {
   const [isError, setIsError] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   useEffect(() => {
       const loadPopularMovies = async () => {
@@ -31,7 +28,7 @@ const Home = () => {
         }
       }
       loadPopularMovies()
-  }, [location.key]);
+  }, []);
 
   function handleSubmit(query){
     if(query.trim() != "" && isLoading != true){
@@ -78,9 +75,12 @@ const Home = () => {
           />
           <button type="submit">Search</button>
         </form>
+        
         <div className="movie-list-container">
           {isError && <h1>{isError}</h1>}
+
           {isLoading && <h1>Loading...</h1>}
+
           {movies.length > 0 ? (
             movies.map((movie) => (
               <MovieCard

@@ -1,16 +1,23 @@
 import { handleFavorite } from '../services/api';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/MovieCard.css';
 
 const MovieCard = ({movie, display, onClick}) => {
-  const [isLoved, setIsLoved] = useState("🤍");
+  const [isLoved, setIsLoved] = useState(false);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("lovedMovies")) || [];
+    const isFavorite = stored.some(m => m.id === movie.id);
+    setIsLoved(isFavorite);
+  }, [movie.id]);
+
   return (
     <div onClick={()=> onClick()} style={{ cursor: "pointer" }} className="movie-card">
 
         <button style={{display:display}} onClick={(e) => {
             e.stopPropagation()
             handleFavorite(movie, isLoved, setIsLoved)}}
-            className='love-btn'>{isLoved}
+            className='love-btn'>{isLoved? "❤️" : "🤍"}
         </button>
 
         <div className="poster">
