@@ -1,0 +1,34 @@
+.favorite-container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+    color: #333;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .favorite-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #d62828;
+  }
+  
+  .favorite-container p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 50px;
+  }
+  
+  /* Optional responsiveness tweak */
+  @media (max-width: 600px) {
+    .favorite-container h2 {
+      font-size: 1.6rem;
+    }
+  
+    .favorite-container p {
+      font-size: 1rem;
+    }
+  }
+  
