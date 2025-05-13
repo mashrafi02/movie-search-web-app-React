@@ -2,11 +2,13 @@ import MovieCard from "../components/MovieCard"
 import MovieModal from "../components/MovieModal"
 import "../css/Home.css"
 
+import { useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import {FetchPopular, FetchQuery} from "../services/api"
 
 const Home = () => {
 
+  const location = useLocation();
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [isLoading, setIsloading] = useState(true);
@@ -28,7 +30,7 @@ const Home = () => {
         }
       }
       loadPopularMovies()
-  }, []);
+  }, [location.key]);
 
   function handleSubmit(query){
     if(query.trim() != "" && isLoading != true){
@@ -36,7 +38,7 @@ const Home = () => {
       const loadSerachMovieas = async () => {
         try{
           let searchMovies = await FetchQuery(query);
-          const filteredMovies = searchMovies?.filter(movie => movie.original_title.toLowerCase().startsWith(query));
+          const filteredMovies = searchMovies?.filter(movie => movie.original_title.toLowerCase().startsWith(query.toLowerCase()));
           setMovies(filteredMovies);
         }catch(err){
           console.log(err);
