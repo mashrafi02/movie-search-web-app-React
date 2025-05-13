@@ -36,7 +36,8 @@ const Home = () => {
       const loadSerachMovieas = async () => {
         try{
           let searchMovies = await FetchQuery(query);
-          setMovies(searchMovies);
+          const filteredMovies = searchMovies?.filter(movie => movie.original_title.toLowerCase().startsWith(query));
+          setMovies(filteredMovies);
         }catch(err){
           console.log(err);
           setIsError(err);
